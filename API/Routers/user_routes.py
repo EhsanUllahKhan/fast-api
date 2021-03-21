@@ -22,7 +22,6 @@ router_user = APIRouter(
     tags=["User"]
 )
 
-# @router_user.get("/",summary="List of user", description="Returns all user" )
 @router_user.post("/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, email=user.email)
