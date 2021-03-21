@@ -57,5 +57,9 @@ def update_lost_item(db: Session, lost_item_id: int, lost_item_schemas: lost_ite
     raise HTTPException(status_code=404, detail="Not Found")
     return update
 
+def delete_lost_item(db: Session, lost_item_id: float, user_id: float):
+    delete = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_id).delete()
+    # delete.execute()
+    return delete
 
 
