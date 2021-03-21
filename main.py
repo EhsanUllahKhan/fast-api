@@ -11,3 +11,4 @@ app = FastAPI(title='Lost and found App', description='APIs for lost and found i
 async def home():
     return RedirectResponse(url="/docs/")
 
+# alembic initialized for db migrations
