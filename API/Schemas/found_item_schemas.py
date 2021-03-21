@@ -3,7 +3,7 @@ from pydantic.schema import date
 
 class FoundItemBase(BaseModel):
     # found_items_id :int
-    name : str
+    # name : str
     found_lattitude:float
     found_longitude: float
     found_date : date
@@ -12,7 +12,7 @@ class FoundItemBase(BaseModel):
 
 class FoundItemCreate(FoundItemBase):
     # found_items_id :int
-    name : str
+    # name : str
     found_lattitude:float
     found_longitude: float
     found_date : date
@@ -20,8 +20,8 @@ class FoundItemCreate(FoundItemBase):
     lost_item_id: int
 
 class FoundItem(FoundItemBase):
-    found_items_id :int
-    name : str
+    foundItem_id :int
+    # name : str
     found_lattitude:float
     found_longitude: float
     found_date : date

@@ -5,7 +5,7 @@ from API.Schemas import found_item_schemas
 
 
 def get_found_item(db: Session, found_item_id: int):
-    return db.query(models.Found_Item).filter(models.Found_Item.found_item_id == found_item_id).first()
+    return db.query(models.Found_Item).filter(models.Found_Item.foundItem_id == found_item_id).first()
 
 def get_found_items(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Found_Item).offset(skip).limit(limit).all()

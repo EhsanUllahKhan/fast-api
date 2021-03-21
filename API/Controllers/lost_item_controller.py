@@ -19,7 +19,8 @@ def create_lost_item(db: Session, lost_item_schemas: lost_item_schemas.LostItemC
     lost_longitude= lost_item_schemas.lost_longitude,
     lost_date=lost_item_schemas.lost_date,
     is_found= lost_item_schemas.is_found,
-    user_id= lost_item_schemas.user_id
+    user_id= lost_item_schemas.user_id,
+        picture=lost_item_schemas.picture
     )
     db.add(db_lost_item)
     db.commit()

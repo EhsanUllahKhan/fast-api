@@ -18,6 +18,7 @@ class Lost_Item(Base):
     lost_longitude = Column(Float)
     lost_date = Column(Date)
     is_found=Column(Boolean)
+    picture = Column(String(length=200))
     user_id = Column(Integer, ForeignKey("users.user_id"))
     #
     # found_items = relationship("Found_Item", backref="lost_items")

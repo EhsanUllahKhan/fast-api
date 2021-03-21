@@ -10,9 +10,8 @@ from ..database import Base
 
 class Found_Item(Base):
     __tablename__ = "found_items"
-
-    found_item_id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(length=20))
+    foundItem_id = Column(Integer,primary_key=True, index=True)
+    # name = Column(String(length=20))
     found_lattitude = Column(Float)
     found_longitude = Column(Float)
     found_date = Column(Date)
