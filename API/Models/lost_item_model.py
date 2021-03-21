@@ -15,7 +15,7 @@ class Lost_Item(Base):
     name = Column(String(length=20))
     description=Column(String(length=50))
     lost_lattitude = Column(Float)
-    lost_longitudee = Column(Float)
+    lost_longitude = Column(Float)
     lost_date = Column(Date)
     is_found=Column(Boolean)
     user_id = Column(Integer, ForeignKey("users.user_id"))

@@ -16,7 +16,7 @@ def create_lost_item(db: Session, lost_item_schemas: lost_item_schemas.LostItemC
         name= lost_item_schemas.name,
         description= lost_item_schemas.description,
     lost_lattitude= lost_item_schemas.lost_lattitude,
-    lost_longitudee= lost_item_schemas.lost_longitudee,
+    lost_longitude= lost_item_schemas.lost_longitude,
     lost_date=lost_item_schemas.lost_date,
     is_found= lost_item_schemas.is_found,
     user_id= lost_item_schemas.user_id
