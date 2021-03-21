@@ -1,5 +1,6 @@
 
 from pydantic import BaseModel
+from typing import Optional
 from pydantic.schema import date
 
 class LostItemBase(BaseModel):
@@ -34,6 +35,9 @@ class LostItemUpdate(LostItemBase):
     is_found : bool
     picture:str
 
+class LostItemSearchByLocation(LostItemBase):
+    lost_lattitude:float
+    lost_longitude: float
 
 class LostItem(LostItemBase):
     lost_item_id :int

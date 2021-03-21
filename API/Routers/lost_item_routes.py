@@ -37,6 +37,13 @@ def read_lost_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_d
     lost_item = crud.get_lost_items(db, skip=skip, limit=limit)
     return lost_item
 
+@router_lost_items.get("/{lost_lattitude}/{lost_longitude}", response_model=schemas.LostItem)
+def read_lost_item(lost_lattitude: float = 0, lost_longitude: float = 0, db: Session = Depends(get_db)):
+    db_lost_item = crud.get_lost_items_by_location(db, lost_lattitude= lost_lattitude, lost_longitude=  lost_longitude)
+    if db_lost_item is None:
+        raise HTTPException(status_code=404, detail="item not found")
+    return db_lost_item
+
 @router_lost_items.get("/{lost_item_id}", response_model=schemas.LostItem)
 def read_lost_item(lost_item_id: int, db: Session = Depends(get_db)):
     db_lost_item = crud.get_lost_item(db, lost_item_id=lost_item_id)

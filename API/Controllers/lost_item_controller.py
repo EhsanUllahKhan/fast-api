@@ -10,6 +10,11 @@ def get_lost_item(db: Session, lost_item_id: int):
 def get_lost_items(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Lost_Item).filter(models.Lost_Item.is_found == False).offset(skip).limit(limit).all()
 
+def get_lost_items_by_location(db: Session, lost_lattitude: float, lost_longitude: float):
+    return db.query(models.Lost_Item).filter(
+        models.Lost_Item.lost_lattitude == lost_lattitude,
+        models.Lost_Item.lost_longitude == lost_longitude
+    ).all()
 
 def create_lost_item(db: Session, lost_item_schemas: lost_item_schemas.LostItemCreate):
     db_lost_item = models.Lost_Item(
