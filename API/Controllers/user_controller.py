@@ -2,8 +2,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from API.Models import user_model as models
-from API.Schemas import schemas
-
+from API.Schemas import user_schemas
 
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.user_id == user_id).first()
@@ -17,7 +16,7 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, user: schemas.UserCreate):
+def create_user(db: Session, user: user_schemas.UserCreate):
     if user.user_id ==0:
         print("create")
         _user = get_user_by_email(db, email=user.email)

@@ -1,6 +1,7 @@
 from typing import List, Optional
 from pydantic import BaseModel
 from API.Schemas.lost_item_schemas import LostItem
+from API.Schemas.found_item_schemas import FoundItem
 
 class UserBase(BaseModel):
     user_id: int
@@ -18,7 +19,7 @@ class UserCreate(UserBase):
 class User(UserBase):
     user_id: int
     lost_items: List[LostItem] = []
-    # found_items: List[FoundItem] = []
+    found_items: List[FoundItem] = []
 
     class Config:
         orm_mode = True

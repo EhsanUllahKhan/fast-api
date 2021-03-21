@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 # from . import crud, models, schemas
 from API.Models import user_model as models
-from API.Schemas import schemas as schemas
+from API.Schemas import user_schemas as schemas
 from API.Controllers import  user_controller as crud
 from ..database import SessionLocal, engine
 def get_db():
