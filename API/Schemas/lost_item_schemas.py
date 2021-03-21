@@ -22,8 +22,7 @@ class LostItemCreate(LostItemBase):
     lost_date : date
     is_found : bool
     user_id : int
-
-    # picture:str
+    picture:str
 
 
 class LostItem(LostItemBase):
@@ -35,7 +34,6 @@ class LostItem(LostItemBase):
     lost_date : date
     is_found : bool
     user_id : int
-
     picture:str
 
     class Config:
