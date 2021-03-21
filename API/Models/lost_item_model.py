@@ -19,10 +19,10 @@ class Lost_Item(Base):
     lost_date = Column(Date)
     is_found=Column(Boolean)
     user_id = Column(Integer, ForeignKey("users.user_id"))
+    #
+    # found_items = relationship("Found_Item", backref="lost_items")
+    # item_pictures = relationship("Item_Picture", back_populates="lost_items")
 
-    found_items = relationship("Found_Item", backref="lost_items")
-    item_pictures = relationship("Item_Picture", back_populates="lost_items")
-
-    # users = relationship("User", back_populates="lost_items")
-    # item_pictures = relationship("item_pictures", back_populates="lost_items")
+    users = relationship("User", back_populates="lost_items")
+    # item_pictures = relationship("Item_Picture", back_populates="lost_items")
     # found_items = relationship("Found_Item", back_populates="lost_items")

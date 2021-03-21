@@ -18,5 +18,5 @@ class Found_Item(Base):
     found_date = Column(Date)
     user_id = Column(Integer, ForeignKey("users.user_id"))
 
-    # users = relationship("User", back_populates="found_items")
+    users = relationship("User", back_populates="found_items")
     # lost_items = relationship("Lost_Item", back_populates="found_items")

@@ -13,5 +13,5 @@ class Item_Picture(Base):
     pictures_id = Column(Integer, primary_key=True, index=True)
     lost_item_id = Column(Integer, ForeignKey("lost_items.lost_item_id"))
 
-    # item_pictures = relationship("item_pictures", back_populates="lost_items")
-    # found_items = relationship("Found_Item", back_populates="lost_items")
+    item_pictures = relationship("item_pictures", back_populates="lost_items")
+    # found_items = relationship("Lost_item", back_populates="found_items")
