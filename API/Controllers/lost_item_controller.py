@@ -62,5 +62,4 @@ def delete_lost_item(db: Session, lost_item_id: float, user_id: float):
     # delete.execute()
     return delete
 
-# delete issue
 
