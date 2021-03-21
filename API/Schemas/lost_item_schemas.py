@@ -24,6 +24,16 @@ class LostItemCreate(LostItemBase):
     user_id : int
     picture:str
 
+class LostItemUpdate(LostItemBase):
+    # lost_item_id: int
+    name : str
+    description : str
+    lost_lattitude:float
+    lost_longitude: float
+    lost_date : date
+    is_found : bool
+    picture:str
+
 
 class LostItem(LostItemBase):
     lost_item_id :int

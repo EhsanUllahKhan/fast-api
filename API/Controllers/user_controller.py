@@ -17,7 +17,7 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_user(db: Session, user: user_schemas.UserCreate):
-    if user.user_id ==0:
+    if user.user_id == 0:
         print("create")
         _user = get_user_by_email(db, email=user.email)
         if _user:

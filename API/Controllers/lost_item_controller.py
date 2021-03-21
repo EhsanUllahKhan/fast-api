@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-
+from fastapi import HTTPException
 from API.Models import lost_item_model as models
 from API.Schemas import lost_item_schemas
 
@@ -26,4 +26,31 @@ def create_lost_item(db: Session, lost_item_schemas: lost_item_schemas.LostItemC
     db.commit()
     db.refresh(db_lost_item)
     return db_lost_item
+
+def update_lost_item(db: Session, lost_item_id: int, lost_item_schemas: lost_item_schemas.LostItemUpdate):
+
+    update = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_id).first()
+    print("\n\nlost item schemas are \n\n", update)
+    if update:
+        query = models.Lost_Item.update().where(
+            models.Lost_Item.lost_item_id == lost_item_id,
+            models.Lost_Item.user_id == lost_item_schemas.user_id
+        ).values(
+            name=lost_item_schemas.name,
+            description=lost_item_schemas.description,
+            lost_lattitude=lost_item_schemas.lost_lattitude,
+            lost_longitude=lost_item_schemas.lost_longitude,
+            lost_date=lost_item_schemas.lost_date,
+            is_found=lost_item_schemas.is_found,
+            user_id=lost_item_schemas.user_id,
+            picture=lost_item_schemas.picture
+        )
+        db.execute(query)
+        db.commit()
+        db.refresh(update)
+        return update
+    raise HTTPException(status_code=404, detail="Not Found")
+    return update
+
+
 
