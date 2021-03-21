@@ -11,7 +11,7 @@ class LostItemBase(BaseModel):
     lost_date: date
     is_found: bool
     user_id: int
-    picture:str
+    # picture:str
 
 class LostItemCreate(LostItemBase):
     # lost_item_id :int
@@ -23,7 +23,7 @@ class LostItemCreate(LostItemBase):
     is_found : bool
     user_id : int
 
-    picture:str
+    # picture:str
 
 
 class LostItem(LostItemBase):

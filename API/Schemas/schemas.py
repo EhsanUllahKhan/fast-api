@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from API.Schemas.lost_item_schemas import LostItem
 
 class UserBase(BaseModel):
-
+    user_id: int
     email:str
     password :str
     # lost_items: List[LostItem] = []
