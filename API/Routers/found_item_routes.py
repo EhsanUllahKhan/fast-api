@@ -8,6 +8,7 @@ from API.Schemas import found_item_schemas as schemas
 from API.Controllers import  found_item_controller as crud
 from ..database import SessionLocal, engine
 
+# was not able to import this function, so in a hurry wrote it here.
 def get_db():
     db = SessionLocal()
     try:

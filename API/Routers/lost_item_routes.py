@@ -1,13 +1,14 @@
 from fastapi import APIRouter
 from typing import List
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from API.Schemas import lost_item_schemas as schemas
 from API.Controllers import  lost_item_controller as crud
-from ..database import SessionLocal, engine
+from ..database import SessionLocal
 
+# was not able to import this function, so in a hurry wrote it here.
 def get_db():
     db = SessionLocal()
     try:
