@@ -28,7 +28,6 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @router_user.post("/login")
 def create_user(user: schemas.UserLogin, db: Session = Depends(get_db)):
-    print('___________ user is ___________', user)
     db_user = crud.login_user(db=db, user=user)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
