@@ -51,9 +51,9 @@ def read_lost_item(lost_item_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="item not found")
     return db_lost_item
 
-@router_lost_items.delete("/delete/{lost_item_id}/{user_id}", response_model=schemas.LostItem)
-def read_lost_item(lost_item_id: int, user_id: int, db: Session = Depends(get_db)):
-    db_lost_item = crud.delete_lost_item(db, lost_item_id=lost_item_id, user_id =user_id )
+@router_lost_items.delete("/delete/{lost_item_id}")
+def read_lost_item(lost_item_id: int, db: Session = Depends(get_db)):
+    db_lost_item = crud.delete_lost_item(db, lost_item_id=lost_item_id)
     if db_lost_item is None:
         raise HTTPException(status_code=404, detail="item not found")
-    return db_lost_item
+    return {'msg':'Deleted'}

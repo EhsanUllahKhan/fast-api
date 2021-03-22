@@ -33,7 +33,6 @@ def create_lost_item(db: Session, lost_item_schemas: lost_item_schemas.LostItemC
     return db_lost_item
 
 def update_lost_item(db: Session, lost_item_id: int, lost_item_schemas: lost_item_schemas.LostItemUpdate):
-
     update = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_id).first()
     print("\n\nlost item schemas are \n\n", update)
     if update:
@@ -57,9 +56,10 @@ def update_lost_item(db: Session, lost_item_id: int, lost_item_schemas: lost_ite
     raise HTTPException(status_code=404, detail="Not Found")
     return update
 
-def delete_lost_item(db: Session, lost_item_id: float, user_id: float):
-    delete = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_id).delete()
-    # delete.execute()
-    return delete
-
-
+def delete_lost_item(db: Session, lost_item_id: float):
+    delete = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_id).first()
+    if delete is None:
+        raise HTTPException(status_code=404, detail="Not Found")
+    db.delete(delete)
+    db.commit()
+    return {"lost_item_id" : lost_item_id, "message": 'Success'}

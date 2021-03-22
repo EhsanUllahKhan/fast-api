@@ -35,9 +35,12 @@ class LostItemUpdate(LostItemBase):
     is_found : bool
     picture:str
 
-class LostItemSearchByLocation(LostItemBase):
+class LostItemSearchByLocation(BaseModel):
     lost_lattitude:float
     lost_longitude: float
+
+class LostItemDelete(BaseModel):
+    lost_item_id :int
 
 class LostItem(LostItemBase):
     lost_item_id :int
