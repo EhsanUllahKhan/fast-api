@@ -15,7 +15,7 @@ class LostItemBase(BaseModel):
     # picture:str
 
 class LostItemCreate(LostItemBase):
-    # lost_item_id :int
+    lost_item_id :int
     name : str
     description : str
     lost_lattitude:float

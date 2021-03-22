@@ -22,7 +22,7 @@ router_user = APIRouter(
     tags=["User"]
 )
 
-@router_user.post("/", response_model=schemas.User)
+@router_user.post("/signup", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db=db, user=user)
 
