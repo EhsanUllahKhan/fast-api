@@ -21,6 +21,7 @@ def get_lost_items_by_name(db: Session, name: str):
         models.Lost_Item.name == name
     ).all()
 
+# this function creates if lost_item_id == 0 else updates record
 def create_lost_item(db: Session, lost_item_schemas: lost_item_schemas.LostItemCreate):
     if lost_item_schemas.lost_item_id == 0:
         db_lost_item = models.Lost_Item(
@@ -53,29 +54,24 @@ def create_lost_item(db: Session, lost_item_schemas: lost_item_schemas.LostItemC
         db.refresh(_u)
         return _u
 
+# this function also updates, but item id has to be provided in params
 def update_lost_item(db: Session, lost_item_id: int, lost_item_schemas: lost_item_schemas.LostItemUpdate):
-    update = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_schemas.lost_item_id).first()
-    print("\n\nlost item schemas are \n\n", update)
-    if update:
-        query = models.Lost_Item.update().where(
-            models.Lost_Item.lost_item_id == lost_item_schemas.lost_item_id,
-            models.Lost_Item.user_id == lost_item_schemas.user_id
-        ).values(
-            name=lost_item_schemas.name,
-            description=lost_item_schemas.description,
-            lost_lattitude=lost_item_schemas.lost_lattitude,
-            lost_longitude=lost_item_schemas.lost_longitude,
-            lost_date=lost_item_schemas.lost_date,
-            is_found=lost_item_schemas.is_found,
-            user_id=lost_item_schemas.user_id,
-            picture=lost_item_schemas.picture
-        )
-        db.execute(query)
+    _u = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_id).one_or_none()
+    # print("\n\nlost item schemas are \n\n", _u)
+    if _u:
+        _u.name = lost_item_schemas.name
+        _u.description = lost_item_schemas.description
+        _u.lost_lattitude = lost_item_schemas.lost_lattitude
+        _u.lost_longitude = lost_item_schemas.lost_longitude
+        _u.lost_date = lost_item_schemas.lost_date
+        _u.is_found = lost_item_schemas.is_found
+        _u.user_id = lost_item_schemas.user_id
+        _u.picture = lost_item_schemas.picture
+        db.add(_u)
         db.commit()
-        db.refresh(update)
-        return update
+        db.refresh(_u)
+        return _u
     raise HTTPException(status_code=404, detail="Not Found")
-    return update
 
 def delete_lost_item(db: Session, lost_item_id: float):
     delete = db.query(models.Lost_Item).filter(models.Lost_Item.lost_item_id == lost_item_id).first()
