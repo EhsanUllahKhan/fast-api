@@ -20,8 +20,8 @@ class Lost_Item(Base):
     is_found=Column(Boolean)
     picture = Column(String(length=200))
     user_id = Column(Integer, ForeignKey("users.user_id"))
-    #
-    # found_items = relationship("Found_Item", backref="lost_items")
+
+    found_items = relationship("Found_Item", backref="lost_items")
     # item_pictures = relationship("Item_Picture", back_populates="lost_items")
 
     users = relationship("User", back_populates="lost_items")
