@@ -8,6 +8,15 @@ import re
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.user_id == user_id).first()
 
+def login_user(db: Session, user: user_schemas.UserLogin):
+    login = db.query(models.User).filter(
+        models.User.email == user.email,
+        models.User.password == user.password
+        ).one()
+    if login is None:
+        raise HTTPException(status_code=400, detail="Invalid credentials or user not found")
+    return {'msg': 'login successful'}
+
 
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()

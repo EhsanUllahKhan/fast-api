@@ -16,6 +16,10 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
+class UserLogin(BaseModel):
+    password: str
+    email: str
+
 class User(UserBase):
     user_id: int
     lost_items: List[LostItem] = []
