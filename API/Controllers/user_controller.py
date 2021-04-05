@@ -28,17 +28,17 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 def create_user(db: Session, user: user_schemas.UserCreate):
     # for password regex is
-    reg = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,18}$"
-    # compiling regex
-    match_re = re.compile(reg)
-    # searching regex
-    res = re.search(match_re, user.password)
+    # reg = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,18}$"
+    # match_re = re.compile(reg)
+    # res = re.search(reg, user.email)
+    # print(res)
 
     email_regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
     match_email = re.compile(email_regex)
     email_result = re.search(email_regex, user.email)
     # validating conditions
-    if res and email_result:
+    if email_result:
+    # if res and email_result:
         print("Valid Password")
         if user.user_id == 0:
             print("create")

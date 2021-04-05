@@ -19,9 +19,10 @@ app.include_router(router_found_items)
 # visiting the link for home directly takes to swagger docs. All the api testing was done on swagger docs.
 @app.get('/')
 async def home():
+    # return {'msg':'helo'}
     return RedirectResponse(url="/docs/")
 
  # if project run through pycharm start button then the port will be 8080, but on uvicorn it'll be 8000
-if __name__ == '__main__':
-    uvicorn.run(app, host="localhost", port=8080)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 # alembic initialized for db migrations
