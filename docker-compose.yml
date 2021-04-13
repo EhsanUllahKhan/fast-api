@@ -1,21 +1,32 @@
-version: "3"
+version: '3'
 
 services:
-  mysql:
-    container_name: mysql_db
+  # Database
+  db:
     image: mysql:5.7
-    environment:
-      - MYSQL_ROOT_PASSWORD=mysql
-    ports:
-      - "3308:3306"
+    volumes:
+      - db_data:/var/lib/mysql
     restart: always
-
-  core-api:
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ehsan
+      MYSQL_DATABASE: ehsan
+      MYSQL_USER: ehsan
+      MYSQL_PASSWORD: ehsan
+    networks:
+      - ehapi
+  ehsan-core-api-containerv1:
     build: .
-    container_name: "core-api-container"
+    container_name: "ehsan-core-api-containerv1"
     ports:
       - "8000:8000"
     volumes:
-      - ./fast-api:/app
+      - api_data:/app
     depends_on:
-      - mysql
+      - db
+networks:
+  ehapi:
+volumes:
+  db_data:
+  api_data:
