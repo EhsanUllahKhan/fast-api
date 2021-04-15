@@ -1,32 +1,94 @@
-version: '3'
-
+version: "3"
+# services:
+#   db:
+#     image: mysql/mysql-server:8.0.19
+#     command: "--default-authentication-plugin=mysql_native_password"
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       - MYSQL_USER=ehsan
+#       - MYSQL_PASSWORD=ehsan
+#       - MYSQL_DATABASE=app_db
+#   fast-api-container:
+#     build: .
+#     container_name: "fast-api-container"
+#     command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+#     volumes:
+#       - . :/app
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - db
 services:
-  # Database
   db:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
+    image: mysql/mysql-server:8.0.19
+    command: "--default-authentication-plugin=mysql_native_password"
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ehsan
-      MYSQL_DATABASE: ehsan
-      MYSQL_USER: ehsan
-      MYSQL_PASSWORD: ehsan
-    networks:
-      - ehapi
-  ehsan-core-api-containerv1:
+      - MYSQL_USER=ehsan
+      - MYSQL_PASSWORD=ehsan
+      - MYSQL_DATABASE=app_db
+  web:
     build: .
-    container_name: "ehsan-core-api-containerv1"
+    command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/app
     ports:
       - "8000:8000"
-    volumes:
-      - api_data:/app
     depends_on:
       - db
-networks:
-  ehapi:
-volumes:
-  db_data:
-  api_data:
+# services:
+#   # Database
+#   db:
+#     image: mysql:5.7
+#     volumes:
+#       - db_data:/var/lib/mysql
+#     restart: always
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       MYSQL_ROOT_PASSWORD: ehsan
+#       MYSQL_DATABASE: ehsan
+#       MYSQL_USER: ehsan
+#       MYSQL_PASSWORD: ehsan
+#     networks:
+#       - dbapi
+#   fast-api-container:
+#     build: .
+#     container_name: "fast-api-container"
+#     ports:
+#       - "8000:8000"
+#     volumes:
+#       - api_data:/app
+#     depends_on:
+#       - db
+# networks:
+#   dbapi:
+# volumes:
+#   db_data:
+#   api_data:
+# services:
+#   db:
+#     image: mysql:8.0.19
+#     command: "--default-authentication-plugin=mysql_native_password"
+#     restart: always
+#     # volumes:
+#     #   - . :/var/lib/mysql
+#     networks:
+#       - backnet
+#     environment:
+#       - MYSQL_DATABASE=example
+#       - MYSQL_ROOT_PASSWORD_FILE=mysql
+#   backend:
+#     build: .
+#     container_name: "fast-api-container"
+#     restart: always
+#     ports:
+#       - 5000:5000
+#     networks:
+#       - backnet
+# # volumes:
+# #   db-data:
+# networks:
+#   backnet:
