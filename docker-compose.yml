@@ -19,6 +19,7 @@ version: "3"
 #       - "8000:8000"
 #     depends_on:
 #       - db
+
 services:
   db:
     image: mysql/mysql-server:8.0.19
@@ -29,6 +30,8 @@ services:
       - MYSQL_USER=ehsan
       - MYSQL_PASSWORD=ehsan
       - MYSQL_DATABASE=app_db
+    volumes:
+      - db_data:/var/lib/mysql
   web:
     build: .
     command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
@@ -88,7 +91,7 @@ services:
 #       - 5000:5000
 #     networks:
 #       - backnet
-# # volumes:
-# #   db-data:
+volumes:
+  db_data:
 # networks:
 #   backnet:
