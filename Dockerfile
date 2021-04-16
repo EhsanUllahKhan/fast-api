@@ -18,8 +18,11 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app/
 
 # Install dependencies
-RUN pip install fastapi[all] pymysql python-dotenv sqlalchemy alembic
-
+# RUN pip install fastapi[all] pymysql python-dotenv sqlalchemy alembic
 COPY . /app/
+# COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+
 RUN chmod 644 main.py
 EXPOSE 8000
